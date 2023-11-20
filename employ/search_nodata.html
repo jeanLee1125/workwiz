@@ -20,19 +20,23 @@
 <meta property="og:url" content="">
 
 <link rel="stylesheet" type="text/css" href="../assets/css/plugin/swiper.min.css">
+<link rel="stylesheet" type="text/css" href="../assets/css/plugin/jquery-ui.min.css">
 <link rel="stylesheet" type="text/css" href="../assets/css/common.css">
 <link rel="stylesheet" type="text/css" href="../assets/css/layout.css">
 <link rel="stylesheet" type="text/css" href="../assets/css/mypage.css">
 <link rel="stylesheet" type="text/css" href="../assets/css/style.css">
 <script type="text/javascript" src="../assets/js/plugin/jquery-3.4.1.min.js"></script>
+<script type="text/javascript" src="../assets/js/plugin/jquery-ui.min.js"></script>
 <script type="text/javascript" src="../assets/js/plugin/jquery.touchSwipe.min.js"></script>
 <script type="text/javascript" src="../assets/js/plugin/swiper.min.js"></script>
+<script type="text/javascript" src="../assets/js/datepicker.js"></script>
 <script type="text/javascript" src="../assets/js/common.js"></script>
 <title></title>
 
 </head>
 <body>
-<div class="wrap bg-gray">
+<!-- mob에서 color 들어갈 경우 wrap에 bg-color 클래스 추가  -->
+<div class="wrap bg-color">
     <!-- header -->
 <div class="header">
     <div class="inner">
@@ -51,9 +55,9 @@
             <!-- nav -->
             <nav class="nav">
                 <ul class="gnb-list">
-                    <li class="active"><a href="#">컨텐츠</a></li>
+                    <li class="active"><a href="#">콘텐츠</a></li>
                     <li><a href="#">프로그램</a></li>
-                    <li><a href="#">체용관</a></li>
+                    <li><a href="#">채용관</a></li>
                     <li><a href="#">클래스</a></li>
                     <li><a href="#">커리어피트니스</a></li>
                 </ul>
@@ -282,7 +286,7 @@
                     <button type="button" class="btn-delete"></button>
                     <button type="button" class="btn-close mo_only"></button>
                 </div>
-                <div class="inp-select text">
+                <div class="inp-select text pc_only">
                     <button class="inp-btn">
                         <span class="value">최신순</span>
                     </button>
@@ -290,6 +294,11 @@
                         <li class="option">최신순</li>
                         <li class="option">마감순</li>
                     </ul>
+                </div>
+                <div class="inp-select text mo_only">
+                    <button class="inp-btn" onclick="popupOpenFn('select_01')">
+                        <span class="value">최신순</span>
+                    </button>
                 </div>
             </div>
         </div>
@@ -303,7 +312,18 @@
     <!-- // contents -->
 
     <!-- pop content -->
-    <div class="pop-wrap bottom-sheet" id="employ-job-filter" data-pop="employ-job-filter">
+    <div class="pop-wrap select-pop" data-pop="select_01">
+        <div class="pop-inner">
+            <ul class="inp-options">
+                <li class="option">최신순</li>
+                <li class="option">마감순</li>
+            </ul>
+            <div class="pop-btn">
+                <button type="button" class="btn full btn-l square" onclick="popupCloseFn('select_01')">취소</button>
+            </div>
+        </div>
+    </div>
+    <div class="pop-wrap bottom-sheet" data-pop="employ-job-filter">
         <div class="pop-inner">
             <h3 class="pop-tit">직무</h3>
             <div class="employ-filter">
@@ -350,10 +370,10 @@
                             <label for="mo_radioJob10" class="inp-label">기타</label>
                         </li>
                     </ul>
-<!--                    <div class="btn-group row pb-0">-->
-<!--                        <button type="button" class="btn full bg-black btn-l square">선택 완료</button>-->
-<!--                        <button type="button" class="btn text-m">초기화</button>-->
-<!--                    </div>-->
+                    <!--                    <div class="btn-group row pb-0">-->
+                    <!--                        <button type="button" class="btn full bg-black btn-l square">선택 완료</button>-->
+                    <!--                        <button type="button" class="btn text-m">초기화</button>-->
+                    <!--                    </div>-->
                 </div>
             </div>
             <div class="btn-group row pb-0">
@@ -362,7 +382,7 @@
             </div>
         </div>
     </div>
-    <div class="pop-wrap bottom-sheet" id="employ-region-filter" data-pop="employ-region-filter">
+    <div class="pop-wrap bottom-sheet" data-pop="employ-region-filter">
         <div class="pop-inner">
             <h3 class="pop-tit">근무지역</h3>
             <div class="employ-filter">
@@ -472,8 +492,21 @@
                     <dd>02-1234-1234</dd>
                 </dl>
             </div>
-            <div class="select">
-                패밀리사이트
+            <div class="familysite">
+                <div class="inp-select pc_only">
+                    <button class="inp-btn">
+                        <span class="value">패밀리 사이트 바로가기</span>
+                    </button>
+                    <ul class="inp-options only-link">
+                        <li class="option"><a href="http://www.naver.com" target="_blank">패밀리</a></li>
+                        <li class="option"><a href="http://www.naver.com" target="_blank">패밀리</a></li>
+                    </ul>
+                </div>
+                <div class="inp-select mo_only">
+                    <button class="inp-btn" onclick="popupOpenFn('pop-familysite')">
+                        <span class="value">패밀리 사이트 바로가기</span>
+                    </button>
+                </div>
             </div>
         </div>
         <div class="address-con">
@@ -505,6 +538,21 @@
 <!--// footer -->
 
 
+<!-- pop content -->
+<div class="pop-wrap select-pop" data-pop="pop-familysite">
+    <div class="pop-inner">
+        <div class="inp-options">
+            <ul class="inp-options-list">
+                <li class="option"><a href="http://www.naver.com" target="_blank">패밀리</a></li>
+                <li class="option"><a href="http://www.naver.com" target="_blank">패밀리</a></li>
+            </ul>
+        </div>
+        <div class="pop-btn">
+            <button type="button" class="btn full btn-l square" onclick="popupCloseFn('pop-familysite')">취소</button>
+        </div>
+    </div>
+</div>
+<!-- //pop content -->
 </div>
 
 </body>
